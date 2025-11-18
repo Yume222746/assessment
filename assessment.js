@@ -14,14 +14,29 @@ assessmentButton.addEventListener( // イベント検知設定の追加
     // 診断結果表示エリアの作成
     resultDivision.innerText = ``;//結果divタグを空文字で上書きし、診断結果表示をリセットする
     tweetDivision.innerText = ``;//ツイートエリアの初期化
-    const header = document.createElement(`h3`); // h3タグを追加する
-    header.innerText = `診断結果`; // タグの内側のテキストを設定
-    resultDivision.appendChild(header) //divタグの子要素としてheaderを指定
+
+    //headerDivisionの作成
+    const headerDivision = document.createElement(`div`); // divタグの追加
+    headerDivision.setAttribute(`class`, `card-header text-bg-primary`);
+    headerDivision.innerText = `診断結果`; // タグの内側のテキストを設定
+
+    //bodyDivisionの作成
+    const bodyDivision = document.createElement(`div`);
+    bodyDivision.setAttribute(`class`, `card-body`);
 
     const paragraph = document.createElement(`p`); // pタグの作成
+    paragraph.setAttribute(`class`, `card-text`);
     const result = assessment(userName);//診断結果を作成
     paragraph.innerText = result;//pタグに診断結果を入力
-    resultDivision.appendChild(paragraph);//divタグの小要素としてpタグを追加
+    bodyDivision.appendChild(paragraph);//bodydivの小要素としてpタグを追加
+
+    //resultDivision に Bootstrap のスタイルを適用する
+    resultDivision.setAttribute(`class`, `card`);
+
+    // headerDivision と bodyDivision を resultDivision に差し込む
+    resultDivision.appendChild(headerDivision);
+    resultDivision.appendChild(bodyDivision);
+
     // ツイートエリアの作成
     const anchor = document.createElement(`a`);
     const hrefValue = "https://twitter.com/intent/tweet?button_hashtag=" + 
